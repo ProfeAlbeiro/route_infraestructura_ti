@@ -1,2 +1,31 @@
-Switch>enable
-Switch#show version
+Configuración: 3560-24PS. Multilayer Switch0
+
+Switch>enable						Activar, pasa a modo privilegiado
+Switch#show version					Ver las versiones
+Switch#show interfaces					Ver las interfases
+ctr + Z							Para saltar la información
+Switch#show interfaces f0/1				Ver una interfaz específica
+Switch#configure terminal				Pasa a modo configuración global ó 'conf t'
+Switch(config)#interface ?				'?' Ayuda sobre comandos que se pueden usar
+Switch(config)#interface fastEthernet ?			'?' Nuevamente, ayuda sobre comandos que se pueden usar
+Switch(config)#interface fastEthernet 0/1		Interfaz específica 'FastEthernet'
+Switch(config-if)#exit					Se utiliza para devolverse un comando anterior
+Switch(config)#hostname SW1				Cambiar el nombre del equipo a 'SW1'
+SW1(config)#banner motd "SOLO PERSONAL AUTORIZADO"	Configuración de uso del equipo (Políticas administrativas)
+SW1(config)#end						Lleva al modo privilegiado saliendo del modo de configuración
+SW1#exit						Salir del Sistema
+SW1(config)#enable secret cisco				Coloca la contraseña 'cisco' para poder ingresar
+SW1(config)#service password-encryption			Encripta la contraseña 'cisco' para que no se pueda ver en la configuración
+SW1(config)#line console 0				Ubicación en modo de configuración de consola, en la línea de consola 0
+SW1(config-line)#password cisco				Coloca la contraseña 'cisco' a la consola
+SW1(config-line)#login					Solicita la contraseña 'cisco' cuando se accesa a la consola
+SW1(config-line)#exec-timeout 20			Configuración tiempo de salida
+SW1(config-line)#logging synchronous			Configuración el logging synchronous
+SW1#show running-config					Ver configuración que tiene el equipo en la memoria RAM
+SW1#wr							Guardar la configuración en el dispositivo
+SW1#copy running-config startup-config			Otra forma de guardar la configuración en el equipo
+SW1#clock set 05:20:00 22 november 2024			Configurar la hora en el dispositivo
+SW1#show clock						Muestra la hora que se ha configurado
+
+
+
