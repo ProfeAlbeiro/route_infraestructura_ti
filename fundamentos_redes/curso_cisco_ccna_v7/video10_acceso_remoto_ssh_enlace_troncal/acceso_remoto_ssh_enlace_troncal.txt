@@ -1,0 +1,76 @@
+------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch (10.0.99.2)
+------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#hostname SW1				Cambia el nombre del 'Switch' por 'SW1'
+
+SW1(config)#vlan 99					Ingresa a la 'vlan 99'
+SW1(config-vlan)#name admin				Coloca el nombre 'admin'
+SW1(config-vlan)#exit					Sale de la configuración de la 'vlan'
+
+SW1(config)#interface vlan 99				Ingresa a la interfaz 'vlan 99'
+SW1(config-if)#ip address 10.0.99.2 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+SW1(config-if)#exit					Sale de configuración de interfaz
+
+SW1(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
+
+SW1(config)#interface f0/1				Ingresa a la Interfaz 'f0/1'
+SW1(config-if)#switchport mode access			Da al puerto el modo de acceso
+SW1(config-if)#switchport access vlan 99		Establece como modo de acceso la 'vlan 99'
+SW1(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
+
+------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch (10.0.99.3)
+------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#hostname SW2				Cambia el nombre del 'Switch' por 'SW1'
+
+SW2(config)#vlan 99					Ingresa a la 'vlan 99'
+SW2(config-vlan)#name admin				Coloca el nombre 'admin'
+SW2(config-vlan)#exit					Sale de la configuración de la 'vlan'
+
+SW2(config)#interface vlan 99				Ingresa a la interfaz 'vlan 99'
+SW2(config-if)#ip address 10.0.99.3 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+SW2(config-if)#exit					Sale de configuración de interfaz
+
+SW2(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
+
+------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch (10.0.99.4)
+------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#hostname SW3				Cambia el nombre del 'Switch' por 'SW1'
+
+SW3(config)#vlan 99					Ingresa a la 'vlan 99'
+SW3(config-vlan)#name admin				Coloca el nombre 'admin'
+SW3(config-vlan)#exit					Sale de la configuración de la 'vlan'
+
+SW3(config)#interface vlan 99				Ingresa a la interfaz 'vlan 99'
+SW3(config-if)#ip address 10.0.99.4 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+SW3(config-if)#exit					Sale de configuración de interfaz
+
+SW3(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
+
+------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch (10.0.99.5)
+------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#hostname SW4				Cambia el nombre del 'Switch' por 'SW1'
+
+SW4(config)#vlan 99					Ingresa a la 'vlan 99'
+SW4(config-vlan)#name admin				Coloca el nombre 'admin'
+SW4(config-vlan)#exit					Sale de la configuración de la 'vlan'
+
+SW4(config)#interface vlan 99				Ingresa a la interfaz 'vlan 99'
+SW4(config-if)#ip address 10.0.99.5 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+SW4(config-if)#exit					Sale de configuración de interfaz
+
+SW4(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
+
+------------------------------------------------------------------------------------------------------------------------
+Configuración 3560-24PS. Switch (10.0.99.6)
+------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,53 @@
+
+Configuración 2960-24TT. Switch0
+
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#dir flash:					Ver archivo de imagen del dispositivo
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#vlan 99					Ingresa a la 'vlan 99'
+Switch(config-vlan)#name admin				Coloca el nombre 'admin'
+Switch(config-vlan)#exit				Sale de la configuración de la 'vlan'
+Switch(config)#interface f0/1				Ingresa a la Interfaz 'f0/1'
+Switch(config-if)#switchport mode access		Da al puerto el modo de acceso
+Switch(config-if)#switchport access vlan 99		Establece como modo de acceso la 'vlan 99'
+Switch(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
+Switch(config)#interface vlan 99			Ingresa a la interfaz 'vlan 99'
+Switch(config-if)#ip address 192.168.1.2 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+Switch(config-if)#exit					Sale de configuración de interfaz
+Switch(config)#interface vlan 99			Ingresa a la interfaz 'vlan 99'
+Switch(config-if)#n shutdown				Activa la configuración de la interfaz
+Switch(config)#ip default-gateway 192.168.1.1		Configura Gateway por defecto
+Switch(config)#line vty 0 15				Configura vty
+Switch(config-line)#password cisco			Se establece la contraseña 'cisco'
+Switch(config-line)#login				Solicita la contraseña 'cisco' cuando se accesa a la contosla
+Switch(config-line)#logging synchronous 		Configuración del logging synchronous
+Switch(config-line)#exec-timeout 20			Tiempo de espera de la consola
+Switch(config-line)#exit				Sale del modo de configuración
+Switch#copy running-config startup-config 		Guardar toda la configuración
+
+
+Configuración 2811. Router0
+
+Router>enable						Activa, pasa a modo privilegiado
+Router#conf t						Pasa a modo configuración global
+Router(config)#interface f0/0				Ingresa a la Interfaz 'f0/0'
+Router(config-if)#ip address 192.168.1.1 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+Router(config-if)#no shutdown				Activa la configuración de la interfaz
+Router(config)#line vty 0 15				Configura vty
+Router(config-line)#password cisco			Se establece la contraseña 'cisco'
+Router(config-line)#login				Solicita la contraseña 'cisco' cuando se accesa a la consola
+Router(config-line)#logging synchronous			Configuración del logging synchronous
+Router(config-line)#exec-timeout 20			Tiempo de espera de la consola
+Router(config-line)#exit				Sale del modo de configuración
+
+Configuración PC-PT. PC2 (PC conectado al Switch)
+Ingresar a Desktop / IP Configuration /			Static / IPv4: 192.168.1.3 / Subnet Mask 255.255.255.0	 
+
+
+
+
+
+
+
+
+
