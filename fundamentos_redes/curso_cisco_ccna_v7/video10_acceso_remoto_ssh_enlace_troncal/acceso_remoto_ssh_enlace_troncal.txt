@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch (10.0.99.2)  --> Tome en cuenta Switch (10.0.99.6)
+Configuración 2960-24TT. SW1 (10.0.99.2)  --> Tome en cuenta Switch (10.0.99.6)
 ------------------------------------------------------------------------------------------------------------------------
 Switch>enable						Activa, pasa a modo privilegiado
 Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
@@ -25,10 +25,22 @@ SW1(config-if)#switchport mode trunk			Da al puerto el modo troncal
 SW1(config-if)#switchport trunk allowed vlan all	Establece como modo troncal para todos 'all'
 SW1(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
 
+SW1(config)#ip domain-name cisco.com			Se ingresa al nombre de dominio 'cisco.com'
+SW1(config)#crypto key generate rsa			Se abre el espacio para generar contraseña '1024'
+SW1(config)#username albeiro password 12345		Se registra nombre de usuario y contraseña
+
+SW1(config)#line vty 0 15				Línea 'vty' para seguridad 
+SW1(config-line)#transport input ssh			Modo de seguridad 'ssh'
+SW1(config-line)#login local				Sesión Local
+SW1(config-line)#exit					Salir
+
+SW1(config)#ip ssh version 2				Se configura la ip 'ssh' versión 2 para la seguridad
+SW1(config)#exit					Salir
+SW1#exit						Salir
 
 
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch (10.0.99.3)
+Configuración 2960-24TT. SW2 (10.0.99.3)
 ------------------------------------------------------------------------------------------------------------------------
 Switch>enable						Activa, pasa a modo privilegiado
 Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
@@ -44,8 +56,9 @@ SW2(config-if)#exit					Sale de configuración de interfaz
 
 SW2(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
 
+
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch (10.0.99.4)
+Configuración 2960-24TT. SW3 (10.0.99.4)
 ------------------------------------------------------------------------------------------------------------------------
 Switch>enable						Activa, pasa a modo privilegiado
 Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
@@ -61,8 +74,10 @@ SW3(config-if)#exit					Sale de configuración de interfaz
 
 SW3(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
 
+
+
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch (10.0.99.5)
+Configuración 2960-24TT. SW4 (10.0.99.5)
 ------------------------------------------------------------------------------------------------------------------------
 Switch>enable						Activa, pasa a modo privilegiado
 Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
@@ -78,8 +93,10 @@ SW4(config-if)#exit					Sale de configuración de interfaz
 
 SW4(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
 
+
+
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 3650-24PS. Switch (10.0.99.6) --> Tome en cuenta Switch (10.0.99.2)
+Configuración 3650-24PS. SW5 (10.0.99.6) --> Tome en cuenta Switch (10.0.99.2)
 ------------------------------------------------------------------------------------------------------------------------
 Switch>enable						Activa, pasa a modo privilegiado
 Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
@@ -93,10 +110,32 @@ SW5(config)#interface vlan 99				Ingresa a la interfaz 'vlan 99'
 SW5(config-if)#ip address 10.0.99.6 255.255.255.0	Configura dirección Ip administrable y máscara de subred
 SW5(config-if)#exit					Sale de configuración de interfaz
 
-SW5(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
-
-SW5(config)#interface g0/1				Ingresa a la Interfaz 'g0/1'
+SW5(config)#interface g1/0/1				Ingresa a la Interfaz 'g1/0/1'
+SW5(config-if)#shutdown					Verifica el puerto
 SW5(config-if)#switchport mode trunk			Da al puerto el modo troncal
-SW5(config-if)#switchport trunk allowed vlan all	Establece como modo troncal para todos 'all'
+SW5(config-if)#no shutdown 				No apagar el dispositivo mientrar se está configurando
+SW1(config-if)#switchport trunk allowed vlan all	Establece como modo troncal para todos 'all'
+SW5(config-if)#switchport trunk encapsulation dot1q	Establece como modo troncal encapsulada 'dot1q' --->[No Funciona]
 SW5(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
 
+SW5(config)#ip domain-name cisco.com			Se ingresa al nombre de dominio 'cisco.com'
+SW5(config)#crypto key generate rsa			Se abre el espacio para generar contraseña '1024'
+SW5(config)#username albeiro password 12345		Se registra nombre de usuario y contraseña
+
+SW5(config)#line vty 0 15				Línea 'vty' para seguridad 
+SW5(config-line)#transport input ssh			Modo de seguridad 'ssh'
+SW5(config-line)#login local				Sesión Local
+SW5(config-line)#exit					Salir
+
+SW5(config)#ip ssh version 2				Se configura la ip 'ssh' versión 2 para la seguridad
+
+------------------------------------------------------------------------------------------------------------------------
+Configuración PC-PT. ADMIN (10.0.99.10)
+------------------------------------------------------------------------------------------------------------------------
+Static / IPv4: 10.0.99.10 / Subnet Mask 255.0.0.0	En Desktop / IP Configuration /				 
+C:\>ssh -l albeiro 10.0.99.2				En Desktop / Command Prompt /
+Password: 12345						Ingresar contraseña
+SW1>exit						Salir
+C:\>ssh -l albeiro 10.0.99.6				En Desktop / Command Prompt /
+Password: 12345						Ingresar contraseña
+SW1>exit						Salir
