@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch (10.0.99.2)
+Configuración 2960-24TT. Switch (10.0.99.2)  --> Tome en cuenta Switch (10.0.99.6)
 ------------------------------------------------------------------------------------------------------------------------
 Switch>enable						Activa, pasa a modo privilegiado
 Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
@@ -19,6 +19,13 @@ SW1(config)#interface f0/1				Ingresa a la Interfaz 'f0/1'
 SW1(config-if)#switchport mode access			Da al puerto el modo de acceso
 SW1(config-if)#switchport access vlan 99		Establece como modo de acceso la 'vlan 99'
 SW1(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
+
+SW1(config)#interface g0/1				Ingresa a la Interfaz 'g0/1'
+SW1(config-if)#switchport mode trunk			Da al puerto el modo troncal
+SW1(config-if)#switchport trunk allowed vlan all	Establece como modo troncal para todos 'all'
+SW1(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
+
+
 
 ------------------------------------------------------------------------------------------------------------------------
 Configuración 2960-24TT. Switch (10.0.99.3)
@@ -72,5 +79,24 @@ SW4(config-if)#exit					Sale de configuración de interfaz
 SW4(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
 
 ------------------------------------------------------------------------------------------------------------------------
-Configuración 3560-24PS. Switch (10.0.99.6)
+Configuración 3650-24PS. Switch (10.0.99.6) --> Tome en cuenta Switch (10.0.99.2)
 ------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#hostname SW5				Cambia el nombre del 'Switch' por 'SW1'
+
+SW5(config)#vlan 99					Ingresa a la 'vlan 99'
+SW5(config-vlan)#name admin				Coloca el nombre 'admin'
+SW5(config-vlan)#exit					Sale de la configuración de la 'vlan'
+
+SW5(config)#interface vlan 99				Ingresa a la interfaz 'vlan 99'
+SW5(config-if)#ip address 10.0.99.6 255.255.255.0	Configura dirección Ip administrable y máscara de subred
+SW5(config-if)#exit					Sale de configuración de interfaz
+
+SW5(config)#ip default-gateway 10.0.99.1		Configura Gateway por defecto
+
+SW5(config)#interface g0/1				Ingresa a la Interfaz 'g0/1'
+SW5(config-if)#switchport mode trunk			Da al puerto el modo troncal
+SW5(config-if)#switchport trunk allowed vlan all	Establece como modo troncal para todos 'all'
+SW5(config-if)#exit					Sale de configuración de interfaz (Modo de acceso)
+
