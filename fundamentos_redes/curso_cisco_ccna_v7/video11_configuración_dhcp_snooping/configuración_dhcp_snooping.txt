@@ -1,0 +1,48 @@
+------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch0
+------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+
+Switch(config)#interface range f0/4-24			Seleccionar el rango de puertos que se van a apagar
+Switch(config-if-range)#no shutdown			Apaga los puertos seleccionados
+Switch(config-if-range)#exit				Salir
+
+Switch(config)#ip dhcp snooping				Configurar e 'dhcp snooping'
+Switch(config)#ip dhcp snooping vlan 2 3		Enlazar a la vlan 2 y 3 para configurar
+Switch(config)#interface f0/1				Seleccionar los puertos confiables
+Switch(config-if)#ip dhcp snooping trust		Definir los puertos confiables
+Switch(config-if)#exit					Salir
+
+----------------------------------------
+NOTA: Para volver a prender los puertos
+
+Switch(config)#interface range f0/4-24			Seleccionar el rango de puertos que se van a prender
+Switch(config-if-range)#shutdown			Apaga los puertos seleccionados
+Switch(config-if-range)#exit				Salir
+
+
+------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch1
+------------------------------------------------------------------------------------------------------------------------
+Switch>enable						Activa, pasa a modo privilegiado
+Switch#conf t						Pasa a modo configuración global ó 'configure terminal'
+
+Switch(config)#interface f0/2				Seleccionar los puertos confiables
+Switch(config-if)#ip dhcp snooping trust		Definir los puertos confiables
+Switch(config-if)#exit					Salir
+
+Switch(config-if)#ip dhcp snooping limit rate 5		Limitar velocidad de atacantes al enviar solicitudes dhcp falsas
+Switch(config-if)#exit					Salir
+
+Switch(config)#ip dhcp snooping 			Configurar e 'dhcp snooping'
+Switch(config)#ip dhcp snooping vlan 2 3		Enlazar a la vlan 2 y 3 para configurar
+Switch(config)#interface f0/1				Seleccionar los puertos confiables
+Switch(config-if)#ip dhcp snooping trust		Definir los puertos confiables
+Switch(config-if)#exit					Salir
+
+
+
+
+
+

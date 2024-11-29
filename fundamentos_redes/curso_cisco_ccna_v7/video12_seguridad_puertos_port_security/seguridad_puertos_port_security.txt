@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch0
+-------------------------------------------------------------------------------------------------------------------------------------------
+Switch>enable								Activa, pasa a modo privilegiado
+Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
+
+Switch(config)#interface range f0/1-24					Seleccionar el rango de puertos que se van a configurar
+Switch(config-if-range)#switchport port-security mac-address sticky	Activa configuración dinámica de direcciones mac							
+Switch(config-if-range)#switchport port-security maximum 1		Establecer un máximo de direcciones mac permitidas '1'
+Switch(config-if-range)#switchport port-security violation restrict	Configurar violaciones de seguridad 'restrict' restringe el puerto
+Switch(config-if-range)#switchport port-security 			Activar la configuración anterior
+Switch(config-if-range)#exit						Salir
+Switch(config)#exit							Salir
+
+Switch#show port-security interface f0/1				Verificar si la seguridad del puerto está habilitada
+Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
+Switch(config)#interface f0/1						Ingresar a la interfaz f0/1
+Switch(config-if)#switchport mode access				Configurar modo de acceso al puerto
+Switch(config-if)#switchport access vlan 1				Configurar vlan 1 como acceso (Aunque ya viene por defecto)
+Switch(config-if)#switchport port-security				Establecer el puerto de seguridad (No sale lo anterior)
+Switch(config-if)#exit							Salir
+Switch(config)#exit							Salir
+Switch#show port-security interface f0/1				Verificar si la seguridad del puerto está habilitada
+Switch#show port-security address					Información de las direcciones mac que están conectadas
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch1
+-------------------------------------------------------------------------------------------------------------------------------------------
+Switch>enable								Activa, pasa a modo privilegiado
+Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
+
