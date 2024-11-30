@@ -26,6 +26,16 @@ Switch(config-if)#switchport access vlan 1				Configurar vlan 1 como acceso (Aun
 Switch(config-if)#switchport port-security				Establecer el puerto de seguridad (No sale lo anterior)
 Switch(config-if)#exit							Salir
 Switch(config)#exit							Salir
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+En el área de trabajo
+-------------------------------------------------------------------------------------------------------------------------------------------
+	-> Enviar un mensaje y comprobar la dirección mac
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch0
+-------------------------------------------------------------------------------------------------------------------------------------------
 Switch#show port-security interface f0/1				Verificar si la seguridad del puerto está habilitada
 Switch#show port-security address					Información de las direcciones mac que están conectadas
 
@@ -45,6 +55,16 @@ Switch(config-if)#switchport port-security maximum 1			Establecer 'mac-address' 
 Switch(config-if)#switchport port-security violation shutdown		Apagar cuando se encuentre otra dirección mac-address
 Switch(config-if)#exit							Salir
 Switch(config)#exit							Salir
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+En el área de trabajo
+-------------------------------------------------------------------------------------------------------------------------------------------
+	-> Enviar un mensaje y comprobar la dirección mac
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Configuración 2960-24TT. Switch1
+-------------------------------------------------------------------------------------------------------------------------------------------
+Switch#show port-security interface f0/1				Verificar si la seguridad del puerto está habilitada
 Switch#show port-security address					Comprobar puerto de seguridad
 
 -------------------------------------------------------------------------------------------------------------------------------------------
