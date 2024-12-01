@@ -101,3 +101,5 @@ Switch(config)#interface fastEthernet 0/4				Ingresar a la interfaz fastEthernet
 Switch(config-if)#switchport mode access				Dar puerto de acceso
 Switch(config-if)#switchport access vlan 30				Acceder a la vlan '30'
 
+
+
