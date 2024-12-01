@@ -1,7 +1,35 @@
 -------------------------------------------------------------------------------------------------------------------------------------------
-Configuración PC-PT. PC0, PC1 PC2
+En el área de trabajo
 -------------------------------------------------------------------------------------------------------------------------------------------
-DHCP 									En Desktop / IP Configuration /
+	-> Cambiar el nombre de PC0 a vlan izq10
+	-> Cambiar el nombre de PC1 a vlan izq20
+	-> Cambiar el nombre de PC2 a vlan izq30
+	-> Cambiar el nombre de PC3 a vlan der10
+	-> Cambiar el nombre de PC4 a vlan der20
+	-> Cambiar el nombre de PC5 a vlan der30
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Configuración 3560-24PS. Multilayer Switch0
+-------------------------------------------------------------------------------------------------------------------------------------------
+No
+Switch>enable								Activa, pasa a modo privilegiado
+Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
+
+Switch(config)#vlan 10							Ingresar a la 'vlan 10'
+Switch(config-vlan)#name departA					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+
+Switch(config)#vlan 20							Ingresar a la 'vlan 20'
+Switch(config-vlan)#name departB					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+
+Switch(config)#vlan 30							Ingresar a la 'vlan 30'
+Switch(config-vlan)#name departC					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+Switch(config)#exit							Salir
+
+Switch#show vlan brief							Verifica la configuración de las 'vlan'
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -10,24 +38,33 @@ Configuración 2960-24TT. Switch0
 Switch>enable								Activa, pasa a modo privilegiado
 Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
 
-Switch(config)#interface range f0/1-24					Seleccionar el rango de puertos que se van a configurar
-Switch(config-if-range)#switchport port-security mac-address sticky	Activa configuración dinámica de direcciones mac							
-Switch(config-if-range)#switchport port-security maximum 1		Establecer un máximo de direcciones mac permitidas '1'
-Switch(config-if-range)#switchport port-security violation restrict	Configurar violaciones de seguridad 'restrict' restringe el puerto
-Switch(config-if-range)#switchport port-security 			Activar la configuración anterior
-Switch(config-if-range)#exit						Salir
+Switch(config)#vlan 10							Ingresar a la 'vlan 10'
+Switch(config-vlan)#name departA					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+
+Switch(config)#vlan 20							Ingresar a la 'vlan 20'
+Switch(config-vlan)#name departB					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+
+Switch(config)#vlan 30							Ingresar a la 'vlan 30'
+Switch(config-vlan)#name departC					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
 Switch(config)#exit							Salir
 
-Switch#show port-security interface f0/1				Verificar si la seguridad del puerto está habilitada
+Switch#show vlan brief							Verifica la configuración de las 'vlan'
 Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
-Switch(config)#interface f0/1						Ingresar a la interfaz f0/1
-Switch(config-if)#switchport mode access				Configurar modo de acceso al puerto
-Switch(config-if)#switchport access vlan 1				Configurar vlan 1 como acceso (Aunque ya viene por defecto)
-Switch(config-if)#switchport port-security				Establecer el puerto de seguridad (No sale lo anterior)
-Switch(config-if)#exit							Salir
-Switch(config)#exit							Salir
-Switch#show port-security interface f0/1				Verificar si la seguridad del puerto está habilitada
-Switch#show port-security address					Información de las direcciones mac que están conectadas
+
+Switch(config)#interface fastEthernet 0/2				Ingresar a la interfaz fastEthernet '0/2'
+Switch(config-if)#switchport mode access				Dar puerto de acceso
+Switch(config-if)#switchport access vlan 10				Acceder a la vlan '10'
+
+Switch(config)#interface fastEthernet 0/3				Ingresar a la interfaz fastEthernet '0/3'
+Switch(config-if)#switchport mode access				Dar puerto de acceso
+Switch(config-if)#switchport access vlan 20				Acceder a la vlan '20'
+
+Switch(config)#interface fastEthernet 0/4				Ingresar a la interfaz fastEthernet '0/4'
+Switch(config-if)#switchport mode access				Dar puerto de acceso
+Switch(config-if)#switchport access vlan 30				Acceder a la vlan '30'
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,65 +73,31 @@ Configuración 2960-24TT. Switch1
 Switch>enable								Activa, pasa a modo privilegiado
 Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
 
-Switch(config)#interface f0/1						Configurar puerto 'f0/1'
-Switch(config-if)#switchport mode access				Entrar al modo de acceso
-Switch(config-if)#switchport access vlan 1				Configurar 'vlan 1'
-Switch(config-if)#switchport port-security 				Establecer puerto de seguridad
-Switch(config-if)#switchport port-security mac-address sticky		Establecer 'mac-address' seguro
-Switch(config-if)#switchport port-security maximum 1			Establecer 'mac-address' para un solo dispositivo
-Switch(config-if)#switchport port-security violation shutdown		Apagar cuando se encuentre otra dirección mac-address
-Switch(config-if)#exit							Salir
+Switch(config)#vlan 10							Ingresar a la 'vlan 10'
+Switch(config-vlan)#name departA					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+
+Switch(config)#vlan 20							Ingresar a la 'vlan 20'
+Switch(config-vlan)#name departB					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
+
+Switch(config)#vlan 30							Ingresar a la 'vlan 30'
+Switch(config-vlan)#name departC					Crear nombre para la 'vlan'
+Switch(config-vlan)#exit						Salir
 Switch(config)#exit							Salir
-Switch#show port-security address					Comprobar puerto de seguridad
 
--------------------------------------------------------------------------------------------------------------------------------------------
-En el área de trabajo
--------------------------------------------------------------------------------------------------------------------------------------------
-	-> Eliminar las conexiones PC1 y PC2 al Switch1 y volver a conectar el PC2
-	-> Enviar un mensaje y comprobar si el Switch1 se apaga
-
--------------------------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch1
--------------------------------------------------------------------------------------------------------------------------------------------
+Switch#show vlan brief							Verifica la configuración de las 'vlan'
 Switch#conf t								Pasa a modo configuración global ó 'configure terminal'
-Switch(config)#interface f0/1						Configurar puerto 'f0/1'
-Switch(config-if)#shutdown						Apagar el puerto totalmente
-Switch(config-if)#no shutdown						Encender nuevamente el puerto
-Switch(config-if)#exit							Salir
-Switch(config)#exit							Salir
 
+Switch(config)#interface fastEthernet 0/2				Ingresar a la interfaz fastEthernet '0/2'
+Switch(config-if)#switchport mode access				Dar puerto de acceso
+Switch(config-if)#switchport access vlan 10				Acceder a la vlan '10'
 
--------------------------------------------------------------------------------------------------------------------------------------------
-En el área de trabajo
--------------------------------------------------------------------------------------------------------------------------------------------
-	-> Nuevamente, enviar un mensaje y comprobar el Switch1 se apaga
+Switch(config)#interface fastEthernet 0/3				Ingresar a la interfaz fastEthernet '0/3'
+Switch(config-if)#switchport mode access				Dar puerto de acceso
+Switch(config-if)#switchport access vlan 20				Acceder a la vlan '20'
 
+Switch(config)#interface fastEthernet 0/4				Ingresar a la interfaz fastEthernet '0/4'
+Switch(config-if)#switchport mode access				Dar puerto de acceso
+Switch(config-if)#switchport access vlan 30				Acceder a la vlan '30'
 
--------------------------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch1
--------------------------------------------------------------------------------------------------------------------------------------------
-Switch#show port-security interface f0/1				Comprobar fallos de seguridad
-
-	Last Source Address:Vlan   : 000A.F3B8.B640:1
-	Security Violation Count   : 1
-
-
--------------------------------------------------------------------------------------------------------------------------------------------
-En el área de trabajo
--------------------------------------------------------------------------------------------------------------------------------------------
-	-> Eliminar la conexión de PC1 al Switch1 y conectar al Switch0
-	-> Esperar que se encienda la conexión
-	-> Enviar un mensaje enviar mensaje entre PC1 -> PC0 y viceversa
-	-> Comprobar que los mensajes se hayan enviado correctamente
-	-> Eliminar las conexiones PC0 y PC1 al Switch0
-	-> Conectar el PC1 primero y luego el PC2 al Switch0
-	-> Esperar que se encienda la conexión
-	-> Enviar un mensaje y comprobar si los mensajes se enviaron correctamente
-
--------------------------------------------------------------------------------------------------------------------------------------------
-Configuración 2960-24TT. Switch0
--------------------------------------------------------------------------------------------------------------------------------------------
-Switch#show port-security interface f0/1				Comprobar fallos de seguridad
-	
-	Last Source Address:Vlan   : 00D0.5820.C140:1
-	Security Violation Count   : 2
